@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VitalPulse — Clinical &amp; Patient Intelligence Dashboard</title>
+  <meta name="description" content="VitalPulse is a responsive healthcare dashboard template with fictional demo data." />
+</head>
+<body class="min-h-screen py-3 px-2 sm:py-6 sm:px-6 lg:px-8 flex justify-center items-start">
+
+  <!-- Main Dashboard Outer Shell (1:1 rounded shell frame matching screenshot) -->
+  <div id="appShell" class="w-full max-w-[1360px] bg-[#F4F6F9] rounded-[28px] sm:rounded-[34px] shadow-[0_24px_60px_-15px_rgba(15,23,42,0.12)] border border-white/80 overflow-visible transition-all duration-300">
+
+    <!-- Top Navigation Bar (Sticky) -->
+    <header class="sticky top-2 z-30 mx-3 sm:mx-6 mt-3 sm:mt-5 bg-white/95 backdrop-blur-md rounded-[22px] sm:rounded-full px-3 sm:px-6 py-3 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] border border-slate-100 flex items-center justify-between gap-2 sm:gap-3">
+      <!-- Left: Custom VitalPulse Brand Logo -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button id="mobileMenuBtn" type="button" aria-label="Toggle navigation menu" class="lg:hidden w-9 h-9 sm:w-10 sm:h-10 shrink-0 rounded-full bg-slate-50 hover:bg-brand-50 text-slate-700 flex items-center justify-center border border-slate-200/70 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <a href="#dashboard" data-nav="dashboard" class="nav-trigger flex items-center gap-1 sm:gap-2.5 group focus:outline-none">
+          <!-- Custom Geometric Rosette SVG matching screenshot's 6-petal cluster in Emerald Teal -->
+          <div class="hidden min-[375px]:flex w-7 h-7 sm:w-9 sm:h-9 items-center justify-center transition-transform duration-300 group-hover:rotate-12">
+            <svg aria-hidden="true" viewBox="0 0 40 40" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="8.5" r="4.5" fill="#0D9488" />
+              <circle cx="29.96" cy="14.25" r="4.5" fill="#14B8A6" />
+              <circle cx="29.96" cy="25.75" r="4.5" fill="#0D9488" />
+              <circle cx="20" cy="31.5" r="4.5" fill="#2DD4BF" />
+              <circle cx="10.04" cy="25.75" r="4.5" fill="#0F766E" />
+              <circle cx="10.04" cy="14.25" r="4.5" fill="#14B8A6" />
+              <circle cx="20" cy="20" r="2.6" fill="#CCFBF1" />
+            </svg>
+          </div>
+          <span class="text-base sm:text-[19px] font-bold tracking-tight text-slate-800">VitalPulse</span>
+        </a>
+      </div>
+
+      <!-- Center: Pill Navigation Switcher -->
+      <nav aria-label="Primary Navigation" class="hidden lg:flex items-center bg-[#F8FAFC] p-1.5 rounded-full border border-slate-200/70 gap-1">
+        <button type="button" data-nav="dashboard" class="nav-tab nav-trigger px-5 py-2 rounded-full text-[13.5px] font-semibold transition-all bg-[#0D9488] text-white shadow-sm">
+          Dashboard
+        </button>
+        <button type="button" data-nav="patient" class="nav-tab nav-trigger px-5 py-2 rounded-full text-[13.5px] font-medium text-slate-600 hover:text-brand-700 hover:bg-white/80 transition-all">
+          Patient
+        </button>
+        <button type="button" data-nav="appointment" class="nav-tab nav-trigger px-5 py-2 rounded-full text-[13.5px] font-medium text-slate-600 hover:text-brand-700 hover:bg-white/80 transition-all">
+          Appointment
+        </button>
+        <button type="button" data-nav="report" class="nav-tab nav-trigger px-5 py-2 rounded-full text-[13.5px] font-medium text-slate-600 hover:text-brand-700 hover:bg-white/80 transition-all">
+          Report
+        </button>
+      </nav>
+
+      <!-- Right: Settings, Notifications, Profile Avatar -->
+      <div class="flex items-center gap-1.5 sm:gap-2.5">
+        <button id="settingsBtn" type="button" title="System Preferences &amp; Reset" class="pill-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#F8FAFC] hover:bg-brand-50 text-slate-600 hover:text-brand-700 border border-slate-200/70 flex items-center justify-center">
+          <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </button>
+
+        <div>
+          <button id="notifBtn" type="button" title="Clinical Notifications" class="pill-btn w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#F8FAFC] hover:bg-brand-50 text-slate-600 hover:text-brand-700 border border-slate-200/70 flex items-center justify-center relative">
+            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+            <span id="notifBadgeDot" class="w-2 h-2 rounded-full bg-amber-500 ring-2 ring-white absolute top-2.5 right-2.5"></span>
+          </button>
+
+          <!-- Notification Popover -->
+          <div id="notifPopover" class="hidden absolute right-3 top-full mt-2 w-[calc(100%-1.5rem)] max-w-sm bg-white rounded-2xl shadow-xl border border-slate-200/80 p-4 z-50">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div>
+                <h4 class="text-sm font-bold text-slate-800">Clinical Alerts</h4>
+                <p class="text-[11px] text-slate-500">Sample patient and lab updates</p>
+              </div>
+              <button id="markAllReadBtn" type="button" class="text-xs font-semibold text-brand-600 hover:text-brand-700">Mark all read</button>
+            </div>
+            <div id="notifList" class="divide-y divide-slate-100 max-h-64 overflow-y-auto my-1"></div>
+          </div>
+        </div>
+
+        <div title="Dr. Selena Vance — Demo coordinator" class="shrink-0 p-0.5 sm:pl-1 sm:pr-2 sm:py-1">
+          <img
+            src="./avatars/selena.jpg"
+            data-avatar
+            alt="Selena"
+            class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover ring-2 ring-brand-500/20"
+          />
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileNavDrawer" class="hidden lg:hidden mx-4 mt-2 bg-white rounded-2xl p-2 shadow-lg border border-slate-200/80 grid grid-cols-2 gap-1.5">
+      <button type="button" data-nav="dashboard" class="nav-tab nav-trigger px-4 py-2.5 rounded-xl text-xs font-semibold bg-[#0D9488] text-white text-center">Dashboard</button>
+      <button type="button" data-nav="patient" class="nav-tab nav-trigger px-4 py-2.5 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-50 text-center">Patient</button>
+      <button type="button" data-nav="appointment" class="nav-tab nav-trigger px-4 py-2.5 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-50 text-center">Appointment</button>
+      <button type="button" data-nav="report" class="nav-tab nav-trigger px-4 py-2.5 rounded-xl text-xs font-medium text-slate-600 hover:bg-slate-50 text-center">Report</button>
+    </div>
+
+    <!-- Main Workspace Body -->
+    <main class="px-4 sm:px-7 pt-6 pb-8">
+
+      <!-- Row A: Greeting + "+ Check new" Primary Button -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+        <div>
+          <h1 class="text-[24px] sm:text-[29px] tracking-tight leading-tight">
+            <span class="font-bold text-[#0D9488]">Good Morning,</span>
+            <span class="font-semibold text-[#14B8A6]"> Selena!</span>
+          </h1>
+          <p id="subGreetingText" class="text-xs text-slate-500 mt-0.5">Clinical overview · Fictional demo data only</p>
+        </div>
+
+        <div class="flex items-center gap-2.5 self-start sm:self-auto">
+          <button id="checkNewBtn" type="button" class="pill-btn inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0F766E] text-white text-[13.5px] font-semibold px-5 py-2.5 rounded-full shadow-[0_8px_20px_-4px_rgba(13,148,136,0.42)]">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            <span>Check new</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Row B: Action Toolbar (Filter, Monthly, Download Data | Search, Support, Content Layout) -->
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <!-- Left Action Pills -->
+        <div class="flex flex-wrap items-center gap-2.5 relative">
+          <!-- Filter Button & Popover -->
+          <div class="relative">
+            <button id="filterToggleBtn" type="button" class="pill-btn inline-flex items-center gap-2 bg-white hover:bg-brand-50/60 text-slate-700 text-[13px] font-medium px-4 py-2 rounded-full border border-slate-200/80 shadow-xs">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18M6 12h12m-9 6h6" />
+              </svg>
+              <span>Filter</span>
+              <span id="activeFilterCount" class="hidden ml-0.5 px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-brand-600 text-white">1</span>
+            </button>
+
+            <div id="filterPopover" class="hidden absolute left-0 mt-2.5 w-72 sm:w-80 bg-white rounded-2xl shadow-xl border border-slate-200/80 p-4 z-40">
+              <div class="flex items-center justify-between pb-2.5 mb-3 border-b border-slate-100">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Clinical Filters</span>
+                <button id="resetFiltersBtn" type="button" class="text-xs font-semibold text-brand-600 hover:underline">Reset all</button>
+              </div>
+              <div class="space-y-3">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Primary Physician</label>
+                  <select id="filterDoctorSelect" class="w-full text-xs rounded-xl border border-slate-200 px-3 py-2 bg-slate-50 focus:bg-white focus:border-brand-500 focus:outline-none">
+                    <option value="all">All Physicians</option>
+                    <option value="Dr.Leslie Alexander">Dr.Leslie Alexander</option>
+                    <option value="Dr.Savannah Nguyen">Dr.Savannah Nguyen</option>
+                    <option value="Dr.Darlene Robertson">Dr.Darlene Robertson</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Care Status</label>
+                  <select id="filterStatusSelect" class="w-full text-xs rounded-xl border border-slate-200 px-3 py-2 bg-slate-50 focus:bg-white focus:border-brand-500 focus:outline-none">
+                    <option value="all">All Clinical Statuses</option>
+                    <option value="Active">Active / Inpatient Care</option>
+                    <option value="Recovery">In Recovery</option>
+                    <option value="Pending">Report Pending</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">Focus Patient Card</label>
+                  <select id="filterPatientSelect" class="w-full text-xs rounded-xl border border-slate-200 px-3 py-2 bg-slate-50 focus:bg-white focus:border-brand-500 focus:outline-none"></select>
+                </div>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex justify-end">
+                <button id="applyFilterBtn" type="button" class="px-4 py-1.5 rounded-full bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold">Apply Filters</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeframe Selector Pill ("Monthly") -->
+          <div class="relative">
+            <button id="timeframeBtn" type="button" class="pill-btn inline-flex items-center gap-2 bg-white hover:bg-brand-50/60 text-slate-700 text-[13px] font-medium px-4 py-2 rounded-full border border-slate-200/80 shadow-xs">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="18" rx="3" />
+                <path stroke-linecap="round" d="M16 2v4M8 2v4M3 10h18" />
+              </svg>
+              <span id="timeframeLabel">Monthly</span>
+              <span class="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center text-slate-500">
+                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </button>
+
+            <div id="timeframeDropdown" class="hidden absolute left-0 mt-2 w-44 bg-white rounded-2xl shadow-xl border border-slate-200/80 py-1.5 z-40">
+              <button type="button" data-tf="Weekly" class="tf-option w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-700 flex items-center justify-between">
+                <span>Weekly</span>
+              </button>
+              <button type="button" data-tf="Monthly" class="tf-option w-full text-left px-4 py-2 text-xs font-semibold text-brand-700 bg-brand-50/70 flex items-center justify-between">
+                <span>Monthly</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-600"></span>
+              </button>
+              <button type="button" data-tf="Quarterly" class="tf-option w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-700 flex items-center justify-between">
+                <span>Quarterly</span>
+              </button>
+              <button type="button" data-tf="Yearly" class="tf-option w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-700 flex items-center justify-between">
+                <span>Yearly</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Download Data Pill -->
+          <button id="downloadCsvBtn" type="button" class="pill-btn inline-flex items-center gap-2 bg-white hover:bg-brand-50/60 text-slate-700 text-[13px] font-medium px-4 py-2 rounded-full border border-slate-200/80 shadow-xs">
+            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m0 0l-4-4m4 4l4-4M4 17v1a2 2 0 002 2h12a2 2 0 002-2v-1" />
+            </svg>
+            <span>Download Data</span>
+          </button>
+        </div>
+
+        <!-- Right Action Pills -->
+        <div class="flex flex-wrap items-center gap-2.5 relative">
+          <!-- Expandable Global Search -->
+          <div id="globalSearchWrapper" class="flex items-center bg-white rounded-full border border-slate-200/80 shadow-xs overflow-hidden transition-all duration-300">
+            <button id="globalSearchBtn" type="button" title="Search patients, doctors, reports" class="w-9 h-9 flex items-center justify-center text-slate-600 hover:text-brand-700 shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7" />
+                <path stroke-linecap="round" d="M20 20l-3.5-3.5" />
+              </svg>
+            </button>
+            <input id="globalSearchInput" type="text" placeholder="Search patient or doctor..." class="w-0 opacity-0 text-xs text-slate-700 placeholder-slate-400 focus:outline-none transition-all duration-300" />
+            <button id="clearGlobalSearchBtn" type="button" class="hidden pr-2.5 text-slate-400 hover:text-slate-600 text-xs">&times;</button>
+          </div>
+
+          <!-- Support Pill -->
+          <button id="supportBtn" type="button" class="pill-btn inline-flex items-center gap-2 bg-white hover:bg-brand-50/60 text-slate-700 text-[13px] font-medium px-4 py-2 rounded-full border border-slate-200/80 shadow-xs">
+            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <rect x="4" y="3" width="16" height="18" rx="3" />
+              <circle cx="12" cy="10" r="2.5" />
+              <path stroke-linecap="round" d="M8 17c.8-2 2.2-3 4-3s3.2 1 4 3" />
+            </svg>
+            <span>Support</span>
+          </button>
+
+          <!-- Content Layout Pill & Popover -->
+          <div class="sm:relative">
+            <button id="layoutBtn" type="button" class="pill-btn inline-flex items-center gap-2 bg-white hover:bg-brand-50/60 text-slate-700 text-[13px] font-medium px-4 py-2 rounded-full border border-slate-200/80 shadow-xs">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="16" rx="3" />
+                <path d="M9 4v16M9 12h12" />
+              </svg>
+              <span>Content Layout</span>
+            </button>
+
+            <div id="layoutPopover" class="hidden absolute left-0 top-full sm:left-auto sm:right-0 mt-2.5 w-[min(18rem,calc(100vw-3.25rem))] bg-white rounded-2xl shadow-xl border border-slate-200/80 p-4 z-40">
+              <div class="flex items-center justify-between pb-2 mb-3 border-b border-slate-100">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Bento Grid Layout</span>
+                <button id="restoreWidgetsBtn" type="button" class="text-xs font-semibold text-brand-600 hover:underline">Show all</button>
+              </div>
+              <div class="mb-3">
+                <span class="block text-[11px] font-semibold text-slate-500 mb-1.5">Card Spacing Density</span>
+                <div class="grid grid-cols-2 gap-1.5 bg-slate-100 p-1 rounded-xl">
+                  <button type="button" data-density="comfortable" class="density-btn py-1.5 text-xs font-semibold rounded-lg bg-white text-brand-700 shadow-xs">Standard 1:1</button>
+                  <button type="button" data-density="compact" class="density-btn py-1.5 text-xs font-medium rounded-lg text-slate-600">Compact</button>
+                </div>
+              </div>
+              <div class="space-y-2 text-xs">
+                <label class="flex items-center justify-between py-1 cursor-pointer">
+                  <span class="text-slate-700 font-medium">Health Report Pending</span>
+                  <input type="checkbox" checked data-widget="widget-pending" class="widget-toggle accent-teal-600 w-4 h-4 rounded" />
+                </label>
+                <label class="flex items-center justify-between py-1 cursor-pointer">
+                  <span class="text-slate-700 font-medium">News From The Doctor</span>
+                  <input type="checkbox" checked data-widget="widget-news" class="widget-toggle accent-teal-600 w-4 h-4 rounded" />
+                </label>
+                <label class="flex items-center justify-between py-1 cursor-pointer">
+                  <span class="text-slate-700 font-medium">Health Trend Chart</span>
+                  <input type="checkbox" checked data-widget="widget-trend" class="widget-toggle accent-teal-600 w-4 h-4 rounded" />
+                </label>
+                <label class="flex items-center justify-between py-1 cursor-pointer">
+                  <span class="text-slate-700 font-medium">Checkup Progress</span>
+                  <input type="checkbox" checked data-widget="widget-checkup" class="widget-toggle accent-teal-600 w-4 h-4 rounded" />
+                </label>
+                <label class="flex items-center justify-between py-1 cursor-pointer">
+                  <span class="text-slate-700 font-medium">Medical Information</span>
+                  <input type="checkbox" checked data-widget="widget-medinfo" class="widget-toggle accent-teal-600 w-4 h-4 rounded" />
+                </label>
+                <label class="flex items-center justify-between py-1 cursor-pointer">
+                  <span class="text-slate-700 font-medium">Patient Health Report</span>
+                  <input type="checkbox" checked data-widget="widget-healthreport" class="widget-toggle accent-teal-600 w-4 h-4 rounded" />
+                </label>
+                <label class="flex items-center justify-between py-1 cursor-pointer">
+                  <span class="text-slate-700 font-medium">My Doctor</span>
+                  <input type="checkbox" checked data-widget="widget-mydoctor" class="widget-toggle accent-teal-600 w-4 h-4 rounded" />
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 1: DASHBOARD BENTO GRID (100% 1:1 REPLICATION OF SCREENSHOT)     -->
+      <!-- ===================================================================== -->
+      <section id="view-dashboard" class="spa-view space-y-5 bento-grid-gap">
+        <!-- ROW 1: 4 Equal-Width Bento Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 bento-grid-gap">
+
+          <!-- CARD 1: Health Report Pending -->
+          <article id="widget-pending" class="bento-card animate-enter stagger-1 p-5 flex flex-col justify-between">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <h2 class="text-[15.5px] font-bold text-slate-800 tracking-tight">Health Report Pending</h2>
+              <button type="button" data-nav="report" class="nav-trigger pill-btn px-3.5 py-1 rounded-full text-[11.5px] font-semibold text-brand-700 bg-white hover:bg-brand-50 border border-slate-200/90">
+                Report
+              </button>
+            </div>
+
+            <!-- Interactive Filter Pills ("15 Report" & "10 No Report") -->
+            <div class="flex items-center justify-center gap-2 mb-1">
+              <button id="badgeReportSeries" type="button" class="pill-btn px-3 py-1 rounded-full bg-[#1E293B] text-white text-[11px] font-semibold shadow-xs">
+                <span id="pendingReportCount">15</span> Report
+              </button>
+              <button id="badgeNoReportSeries" type="button" class="pill-btn px-3 py-1 rounded-full bg-[#CCFBF1]/80 text-[#0F766E] text-[11px] font-semibold hover:bg-[#CCFBF1]">
+                <span id="pendingNoReportCount">10</span> No Report
+              </button>
+            </div>
+
+            <!-- Dual Smooth Spline SVG Chart -->
+            <div class="relative w-full h-[145px] select-none">
+              <svg id="pendingSplineSvg" viewBox="0 0 280 140" class="w-full h-full overflow-visible">
+                <!-- Y-axis labels -->
+                <text x="4" y="24" fill="#94A3B8" font-size="10" font-weight="500">30</text>
+                <text x="4" y="68" fill="#94A3B8" font-size="10" font-weight="500">20</text>
+                <text x="4" y="112" fill="#94A3B8" font-size="10" font-weight="500">10</text>
+
+                <!-- Vertical dashed guide at Feb -->
+                <line id="pendingGuideLine" x1="104" y1="14" x2="104" y2="116" stroke="#0D9488" stroke-width="1.3" stroke-dasharray="4 4" />
+
+                <!-- Secondary Light Mint Spline ("No Report") -->
+                <path id="noReportCurvePath"
+                  d="M 32 76 C 55 76, 68 98, 92 78 C 112 62, 125 94, 148 86 C 170 78, 182 54, 204 66 C 226 78, 244 96, 266 78"
+                  fill="none" stroke="#99F6E4" stroke-width="2.2" stroke-linecap="round" />
+
+                <!-- Primary Emerald Teal Spline ("Report") -->
+                <path id="reportCurvePath"
+                  d="M 32 66 C 58 66, 74 84, 96 84 C 118 84, 130 56, 152 54 C 174 52, 186 32, 210 34 C 232 36, 244 74, 264 68 C 270 66, 273 58, 276 50"
+                  fill="none" stroke="#0D9488" stroke-width="2.4" stroke-linecap="round" />
+
+                <!-- Active Focus Node on Dashed Line -->
+                <circle id="pendingFocusDot" cx="104" cy="83" r="4" fill="#0D9488" stroke="#FFFFFF" stroke-width="2" />
+
+                <!-- Interactive Month Hit Targets -->
+                <g class="cursor-pointer" data-month-idx="0">
+                  <rect x="24" y="10" width="52" height="110" fill="transparent" />
+                  <text x="42" y="132" fill="#94A3B8" font-size="10" font-weight="500">Jan</text>
+                </g>
+                <g class="cursor-pointer" data-month-idx="1">
+                  <rect x="82" y="10" width="52" height="110" fill="transparent" />
+                  <text x="96" y="132" fill="#0F766E" font-size="10" font-weight="700">Feb</text>
+                </g>
+                <g class="cursor-pointer" data-month-idx="2">
+                  <rect x="148" y="10" width="52" height="110" fill="transparent" />
+                  <text x="166" y="132" fill="#94A3B8" font-size="10" font-weight="500">Mar</text>
+                </g>
+                <g class="cursor-pointer" data-month-idx="3">
+                  <rect x="216" y="10" width="58" height="110" fill="transparent" />
+                  <text x="238" y="132" fill="#94A3B8" font-size="10" font-weight="500">Apr</text>
+                </g>
+              </svg>
+            </div>
+          </article>
+
+          <!-- CARD 2: News From The Doctor (Featured Emerald-Teal Gradient Card) -->
+          <article id="widget-news" class="animate-enter stagger-2 rounded-[24px] p-5 bg-gradient-to-br from-[#0D9488] via-[#0F766E] to-[#115E59] text-white shadow-[0_14px_30px_-8px_rgba(13,148,136,0.45)] flex flex-col justify-between relative overflow-hidden">
+            <!-- Subtle decorative ambient radial glow -->
+            <div class="w-40 h-40 rounded-full bg-teal-300/15 blur-2xl absolute -right-10 -bottom-10 pointer-events-none"></div>
+
+            <!-- Top Row: Frosted Circular Icon + "Today's info" White Pill -->
+            <div class="flex items-center justify-between gap-2 relative z-10">
+              <div class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-xs flex items-center justify-center border border-white/25">
+                <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center shadow-xs">
+                  <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-teal-200 to-teal-600 block"></span>
+                </div>
+              </div>
+              <button id="todaysInfoBtn" type="button" class="pill-btn px-3.5 py-1.5 rounded-full bg-white text-[#0F766E] text-[11.5px] font-bold shadow-xs hover:bg-brand-50">
+                Today's info
+              </button>
+            </div>
+
+            <!-- Slide Content -->
+            <div class="my-4 relative z-10">
+              <h3 id="newsSlideTitle" class="text-[17px] font-bold tracking-tight mb-2 leading-snug">News From The Doctor</h3>
+              <p id="newsSlideBody" class="text-[12.5px] text-teal-50/90 leading-relaxed">
+                Our process is designed to make booking appointments, consultations, and treatments easy and convenient for you.
+              </p>
+            </div>
+
+            <!-- 4 Carousel Indicator Bars -->
+            <div id="newsCarouselDots" class="grid grid-cols-4 gap-2 relative z-10 pt-1">
+              <button type="button" data-slide="0" aria-label="Slide 1" class="news-dot h-1 rounded-full bg-white transition-all"></button>
+              <button type="button" data-slide="1" aria-label="Slide 2" class="news-dot h-1 rounded-full bg-white/35 hover:bg-white/60 transition-all"></button>
+              <button type="button" data-slide="2" aria-label="Slide 3" class="news-dot h-1 rounded-full bg-white/35 hover:bg-white/60 transition-all"></button>
+              <button type="button" data-slide="3" aria-label="Slide 4" class="news-dot h-1 rounded-full bg-white/35 hover:bg-white/60 transition-all"></button>
+            </div>
+          </article>
+
+          <!-- CARD 3: Health Trend Chart -->
+          <article id="widget-trend" class="bento-card animate-enter stagger-3 p-5 flex flex-col justify-between">
+            <div class="flex items-center justify-between gap-2">
+              <h2 class="text-[15.5px] font-bold text-slate-800 tracking-tight">Health Trend Chart</h2>
+              <button id="cycleTrendMetricBtn" type="button" title="Switch trend metric" class="pill-btn w-7 h-7 rounded-full border border-slate-200/90 hover:bg-brand-50 text-slate-500 hover:text-brand-700 flex items-center justify-center">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <circle cx="6" cy="12" r="1.6" />
+                  <circle cx="12" cy="12" r="1.6" />
+                  <circle cx="18" cy="12" r="1.6" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Big KPI Percentage + Delta Pill -->
+            <div class="flex items-center gap-2.5 mt-2 mb-1">
+              <span id="trendPercentValue" class="text-[32px] font-extrabold text-slate-800 tracking-tight leading-none">85%</span>
+              <span id="trendDeltaBadge" class="px-2.5 py-1 rounded-full bg-[#CCFBF1]/80 text-[#0F766E] text-[11px] font-bold">
+                +0,75%
+              </span>
+              <span id="trendMetricSubtitle" class="text-[11px] font-medium text-slate-400 ml-auto">Recovery</span>
+            </div>
+
+            <!-- Stepped Area Line Chart -->
+            <div class="w-full h-[126px] select-none">
+              <svg viewBox="0 0 260 120" class="w-full h-full overflow-visible">
+                <defs>
+                  <linearGradient id="trendAreaGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#14B8A6" stop-opacity="0.28" />
+                    <stop offset="100%" stop-color="#14B8A6" stop-opacity="0.01" />
+                  </linearGradient>
+                </defs>
+                <!-- Subtle vertical day separators -->
+                <line x1="72" y1="15" x2="72" y2="96" stroke="#F1F5F9" stroke-width="1" />
+                <line x1="134" y1="15" x2="134" y2="96" stroke="#F1F5F9" stroke-width="1" />
+                <line x1="196" y1="15" x2="196" y2="96" stroke="#F1F5F9" stroke-width="1" />
+
+                <!-- Area Fill -->
+                <path id="trendAreaPath"
+                  d="M 12 84 L 46 84 L 68 58 L 96 58 L 116 42 L 154 42 L 174 30 L 210 30 L 244 10 L 244 96 L 12 96 Z"
+                  fill="url(#trendAreaGrad)" />
+
+                <!-- Stepped Stroke -->
+                <path id="trendStrokePath"
+                  d="M 12 84 L 46 84 L 68 58 L 96 58 L 116 42 L 154 42 L 174 30 L 210 30 L 244 10"
+                  fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+
+                <!-- X-axis day labels -->
+                <text x="14" y="114" fill="#94A3B8" font-size="10" font-weight="500">Mon</text>
+                <text x="74" y="114" fill="#94A3B8" font-size="10" font-weight="500">Tue</text>
+                <text x="136" y="114" fill="#94A3B8" font-size="10" font-weight="500">Wed</text>
+                <text x="200" y="114" fill="#94A3B8" font-size="10" font-weight="500">Thu</text>
+              </svg>
+            </div>
+          </article>
+
+          <!-- CARD 4: Checkup progress -->
+          <article id="widget-checkup" class="bento-card animate-enter stagger-4 p-5 flex flex-col justify-between">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <h2 class="text-[15.5px] font-bold text-slate-800 tracking-tight">Checkup progress</h2>
+              <button id="manageCheckupsBtn" type="button" title="Edit checkup milestones" class="pill-btn w-7 h-7 rounded-full border border-slate-200/90 hover:bg-brand-50 text-slate-500 hover:text-brand-700 flex items-center justify-center">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <circle cx="6" cy="12" r="1.6" />
+                  <circle cx="12" cy="12" r="1.6" />
+                  <circle cx="18" cy="12" r="1.6" />
+                </svg>
+              </button>
+            </div>
+
+            <div id="checkupListContainer" class="space-y-5 my-auto"></div>
+          </article>
+        </div>
+
+        <!-- ROW 2: 3-Column Asymmetric Bento Grid (3 cols + 6 cols + 3 cols on 12-col grid) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 bento-grid-gap">
+
+          <!-- CARD 5: Medical Information (3 cols) -->
+          <article id="widget-medinfo" class="bento-card animate-enter stagger-5 lg:col-span-3 p-5 flex flex-col justify-between">
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <h2 class="text-[15.5px] font-bold text-slate-800 tracking-tight">Medical Information</h2>
+              <button type="button" data-nav="patient" class="nav-trigger pill-btn px-3 py-1 rounded-full text-[11px] font-semibold text-brand-700 bg-white hover:bg-brand-50 border border-slate-200/90">
+                See Details
+              </button>
+            </div>
+
+            <!-- Patient Profile Header + Digital Health Pass QR Code -->
+            <div class="flex items-center justify-between gap-2.5 pb-4 mb-4 border-b border-slate-100">
+              <button id="cycleFeaturedPatientBtn" type="button" title="Click to switch active patient" class="flex items-center gap-3 text-left group min-w-0">
+                <img
+                  id="featuredPatientAvatar"
+                  src="./avatars/cameron.jpg"
+                  data-avatar
+                  alt="Cameron Williamson"
+                  class="w-11 h-11 rounded-full object-cover ring-2 ring-brand-500/20 group-hover:ring-brand-500 transition shrink-0"
+                />
+                <div class="min-w-0">
+                  <p id="featuredPatientName" class="text-[13.5px] font-bold text-slate-800 truncate group-hover:text-brand-700 transition">Cameron Williamson</p>
+                  <p id="featuredPatientRole" class="text-[11.5px] text-slate-400 font-medium">Pasien</p>
+                </div>
+              </button>
+
+              <!-- Crisp Vector QR Code (Click to open Digital Health Pass Modal) -->
+              <button id="openQrPassBtn" type="button" title="Open Digital Patient QR Pass" class="pill-btn p-1.5 rounded-xl bg-slate-50 hover:bg-brand-50 border border-slate-200/80 shrink-0">
+                <svg class="w-9 h-9 text-slate-800" viewBox="0 0 36 36" fill="currentColor">
+                  <path d="M2 2h10v10H2V2zm2 2v6h6V4H4zm2 2h2v2H6V6zm18-4h10v10H24V2zm2 2v6h6V4h-6zm2 2h2v2h-2V6zM2 24h10v10H2V24zm2 2v6h6v-6H4zm2 2h2v2H6v-2zm10-24h2v4h-2V4zm4 2h2v4h-2V6zm-4 6h4v2h-4v-2zm-2 4h4v4h-4v-4zm6 0h4v2h-4v-2zm6 0h6v4h-6v-4zm-12 6h2v4h-2v-4zm4 2h6v2h-6v-2zm8 0h4v6h-4v-6zm-14 4h4v6h-4v-6zm6 2h4v4h-4v-4zm6 2h2v2h-2v-2z" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- 2x2 Clinical Metadata Grid -->
+            <div class="grid grid-cols-2 gap-x-3 gap-y-4">
+              <div>
+                <p class="text-[11px] text-slate-400 font-medium mb-0.5">Medical History</p>
+                <p id="featuredMedHistory" class="text-[12px] font-bold text-slate-800 leading-snug">Medical inpatient care</p>
+              </div>
+              <div>
+                <p class="text-[11px] text-slate-400 font-medium mb-0.5">Current Medications</p>
+                <p id="featuredMedications" class="text-[12px] font-bold text-slate-800 leading-snug">Herbal medicine</p>
+              </div>
+              <div>
+                <p class="text-[11px] text-slate-400 font-medium mb-0.5">Allergies</p>
+                <p id="featuredAllergies" class="text-[12px] font-bold text-slate-800 leading-snug">No allergies present</p>
+              </div>
+              <div>
+                <p class="text-[11px] text-slate-400 font-medium mb-0.5">Primary Physician</p>
+                <p id="featuredPhysician" class="text-[12px] font-bold text-slate-800 leading-snug">Dr.Leslie Alexander</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 6: Patient health report (6 cols - Wide Centerpiece Bar Chart + Floating Dark Callout) -->
+          <article id="widget-healthreport" class="bento-card animate-enter stagger-6 lg:col-span-6 p-5 flex flex-col justify-between relative">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <h2 class="text-[15.5px] font-bold text-slate-800 tracking-tight">Patient health report</h2>
+
+              <div class="flex items-center gap-4">
+                <!-- Interactive Legend Toggles -->
+                <div class="flex items-center gap-3 text-[11.5px] font-medium">
+                  <button id="toggleProgressLegend" type="button" class="inline-flex items-center gap-1.5 text-slate-500 hover:text-slate-800 transition">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#CCFBF1] border border-teal-300"></span>
+                    <span>Progress</span>
+                  </button>
+                  <button id="toggleRecoveryLegend" type="button" class="inline-flex items-center gap-1.5 text-slate-700 font-semibold hover:text-brand-700 transition">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#0D9488]"></span>
+                    <span>Recovery</span>
+                  </button>
+                </div>
+
+                <button type="button" data-nav="report" class="nav-trigger pill-btn px-3.5 py-1 rounded-full text-[11.5px] font-semibold text-brand-700 bg-white hover:bg-brand-50 border border-slate-200/90">
+                  See Details
+                </button>
+              </div>
+            </div>
+
+            <!-- Interactive 6-Month Recovery Chart Container -->
+            <div class="relative w-full pt-3 pb-1 select-none">
+              <!-- Floating Dark Slate Callout Card (Matches screenshot's dark tooltip card) -->
+              <div id="recoveryCalloutCard" class="sm:absolute sm:left-[31%] sm:top-1 z-20 mb-3 sm:mb-0 bg-[#1E293B] text-white rounded-2xl px-3.5 py-2.5 shadow-xl border border-slate-700/60 w-fit transition-all duration-300">
+                <p id="calloutTitle" class="text-[11.5px] font-bold text-white mb-1">Monday &bull; Feb Peak (74%)</p>
+                <div class="space-y-0.5 text-[10.5px] text-slate-300">
+                  <p class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#2DD4BF]"></span>
+                    <span id="calloutLine1">towards recovery</span>
+                  </p>
+                  <p class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#14B8A6]"></span>
+                    <span id="calloutLine2">treatment process</span>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Chart Grid with Y-axis + 50% Dashed Threshold + 6 Month Vertical Gradient Bars -->
+              <div class="relative h-[185px] flex items-end pl-8 pr-2 pt-4">
+                <!-- Y-axis Labels -->
+                <div class="absolute left-0 top-3 bottom-6 flex flex-col justify-between text-[11px] font-medium text-slate-400">
+                  <span>70</span>
+                  <span>50</span>
+                  <span>30</span>
+                  <span>10</span>
+                </div>
+
+                <!-- 50% Dashed Reference Line -->
+                <div class="absolute left-7 right-2 top-[43%] border-t-[1.5px] border-dashed border-brand-500/70 pointer-events-none flex items-center">
+                  <span class="w-2 h-2 rounded-full bg-brand-600 -ml-1 -mt-[1px]"></span>
+                </div>
+
+                <!-- 6 Month Bars Rendered Dynamically -->
+                <div id="recoveryBarsGrid" class="w-full h-full grid grid-cols-6 gap-3 sm:gap-5 items-end relative z-10"></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 7: My Doctor (3 cols) -->
+          <article id="widget-mydoctor" class="bento-card animate-enter stagger-7 lg:col-span-3 p-5 flex flex-col justify-between">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <h2 class="text-[15.5px] font-bold text-slate-800 tracking-tight">My Doctor</h2>
+              <button id="openDoctorDirectoryBtn" type="button" class="pill-btn px-3 py-1 rounded-full text-[11px] font-semibold text-brand-700 bg-white hover:bg-brand-50 border border-slate-200/90">
+                See Details
+              </button>
+            </div>
+
+            <div id="myDoctorListContainer" class="space-y-3 my-auto"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 2: PATIENT MANAGEMENT (FULL CRUD + SEARCH + FILTER + BULK)       -->
+      <!-- ===================================================================== -->
+      <section id="view-patient" class="spa-view hidden animate-enter">
+        <div class="bento-card p-5 sm:p-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+            <div>
+              <h2 class="text-lg font-bold text-slate-800">Patient Registry &amp; Clinical Profiles</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Manage inpatient records, medications, allergies, and assigned physicians</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2.5">
+              <button id="bulkDeletePatientsBtn" type="button" class="hidden pill-btn px-4 py-2 rounded-full bg-rose-50 text-rose-600 hover:bg-rose-100 text-xs font-semibold border border-rose-200">
+                Delete Selected (<span id="selectedPatientCount">0</span>)
+              </button>
+              <button id="addPatientModalBtn" type="button" class="pill-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-semibold shadow-sm">
+                <span>+ Add Patient</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Filter & Search Bar -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 my-4">
+            <input id="patientSearchInput" type="text" placeholder="Search by name, condition, or physician..." class="text-xs rounded-xl border border-slate-200 px-3.5 py-2.5 bg-slate-50 focus:bg-white focus:border-brand-500 focus:outline-none" />
+            <select id="patientStatusFilter" class="text-xs rounded-xl border border-slate-200 px-3.5 py-2.5 bg-slate-50 focus:bg-white focus:border-brand-500 focus:outline-none">
+              <option value="all">All Statuses</option>
+              <option value="Active">Active</option>
+              <option value="Recovery">Recovery</option>
+              <option value="Pending">Pending</option>
+            </select>
+            <select id="patientSortSelect" class="text-xs rounded-xl border border-slate-200 px-3.5 py-2.5 bg-slate-50 focus:bg-white focus:border-brand-500 focus:outline-none">
+              <option value="name-asc">Sort: Name (A &rarr; Z)</option>
+              <option value="name-desc">Sort: Name (Z &rarr; A)</option>
+              <option value="recovery-desc">Sort: Recovery Rate (High &rarr; Low)</option>
+            </select>
+          </div>
+
+          <div class="overflow-x-auto rounded-2xl border border-slate-100">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-50/90 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">
+                  <th class="py-3 px-4 w-10">
+                    <input id="selectAllPatientsCb" type="checkbox" class="accent-teal-600 rounded" />
+                  </th>
+                  <th class="py-3 px-4">Patient</th>
+                  <th class="py-3 px-4">Medical History</th>
+                  <th class="py-3 px-4">Medication</th>
+                  <th class="py-3 px-4">Primary Physician</th>
+                  <th class="py-3 px-4">Recovery</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="patientsTableBody" class="divide-y divide-slate-100 text-xs"></tbody>
+            </table>
+          </div>
+          <div id="patientsPaginationBar" class="flex items-center justify-between mt-4 text-xs text-slate-500"></div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 3: APPOINTMENT SCHEDULER (FULL CRUD + STATUS WORKFLOW)           -->
+      <!-- ===================================================================== -->
+      <section id="view-appointment" class="spa-view hidden animate-enter">
+        <div class="bento-card p-5 sm:p-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+            <div>
+              <h2 class="text-lg font-bold text-slate-800">Clinical Appointments &amp; Consultations</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Schedule, reschedule, and track specialist consultations</p>
+            </div>
+            <button id="addAppointmentModalBtn" type="button" class="pill-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-semibold shadow-sm self-start sm:self-auto">
+              <span>+ Book Appointment</span>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 my-4">
+            <input id="appointmentSearchInput" type="text" placeholder="Search patient, doctor, or department..." class="text-xs rounded-xl border border-slate-200 px-3.5 py-2.5 bg-slate-50 focus:bg-white focus:border-brand-500 focus:outline-none" />
+            <select id="appointmentStatusFilter" class="text-xs rounded-xl border border-slate-200 px-3.5 py-2.5 bg-slate-50 focus:bg-white focus:border-brand-500 focus:outline-none">
+              <option value="all">All Appointment States</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+
+          <div class="overflow-x-auto rounded-2xl border border-slate-100">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-50/90 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">
+                  <th class="py-3 px-4">Patient</th>
+                  <th class="py-3 px-4">Specialist</th>
+                  <th class="py-3 px-4">Department</th>
+                  <th class="py-3 px-4">Date &amp; Time</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="appointmentsTableBody" class="divide-y divide-slate-100 text-xs"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 4: DIAGNOSTIC REPORTS (FULL CRUD + LIVE DASHBOARD KPI SYNC)      -->
+      <!-- ===================================================================== -->
+      <section id="view-report" class="spa-view hidden animate-enter">
+        <div class="bento-card p-5 sm:p-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+            <div>
+              <h2 class="text-lg font-bold text-slate-800">Diagnostic &amp; Health Recovery Reports</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Lab diagnostics, recovery scores, and pending clinical reviews</p>
+            </div>
+            <button id="addReportModalBtn" type="button" class="pill-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-semibold shadow-sm self-start sm:self-auto">
+              <span>+ Create Report</span>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 my-4">
+            <input id="reportSearchInput" type="text" placeholder="Search report title, patient, or lab code..." class="text-xs rounded-xl border border-slate-200 px-3.5 py-2.5 bg-slate-50 focus:bg-white focus:border-brand-500 focus:outline-none" />
+            <select id="reportStatusFilter" class="text-xs rounded-xl border border-slate-200 px-3.5 py-2.5 bg-slate-50 focus:bg-white focus:border-brand-500 focus:outline-none">
+              <option value="all">All Report States</option>
+              <option value="Completed">Completed</option>
+              <option value="Pending">Pending Review</option>
+            </select>
+          </div>
+
+          <div class="overflow-x-auto rounded-2xl border border-slate-100">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-50/90 text-[11px] font-bold uppercase tracking-wider text-slate-500 border-b border-slate-100">
+                  <th class="py-3 px-4">Report ID</th>
+                  <th class="py-3 px-4">Patient</th>
+                  <th class="py-3 px-4">Diagnostic Panel</th>
+                  <th class="py-3 px-4">Recovery Score</th>
+                  <th class="py-3 px-4">Date</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="reportsTableBody" class="divide-y divide-slate-100 text-xs"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- CLINICAL SUPPORT SLIDE-OVER DRAWER                                        -->
+  <!-- ========================================================================= -->
+  <div id="supportDrawerBackdrop" class="hidden fixed inset-0 bg-slate-900/35 backdrop-blur-sm z-50 flex justify-end">
+    <div class="w-full max-w-md bg-white h-full shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
+      <div>
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+          <div>
+            <h3 class="text-base font-bold text-slate-800">VitalPulse Help</h3>
+            <p class="text-xs text-slate-500">Guides for using the demo dashboard</p>
+          </div>
+          <button id="closeSupportDrawerBtn" type="button" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold">&times;</button>
+        </div>
+
+        <div class="mt-4">
+          <input id="supportFaqSearch" type="text" placeholder="Search clinical guides &amp; FAQs..." class="w-full text-xs rounded-xl border border-slate-200 px-3.5 py-2.5 bg-slate-50 focus:bg-white focus:border-brand-500 focus:outline-none" />
+        </div>
+
+        <div id="supportFaqList" class="mt-4 space-y-2.5"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- UNIVERSAL INTERACTIVE MODAL (CRUD, QR PASS, DOCTOR PROFILE, SETTINGS)     -->
+  <!-- ========================================================================= -->
+  <div id="universalModalBackdrop" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 p-4 flex items-center justify-center">
+    <div class="w-full max-w-lg bg-white rounded-[26px] shadow-2xl border border-slate-100 overflow-hidden animate-enter">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50/60">
+        <h3 id="modalTitle" class="text-[15.5px] font-bold text-slate-800">Modal Title</h3>
+        <button id="closeUniversalModalBtn" type="button" class="w-8 h-8 rounded-full bg-white hover:bg-slate-100 border border-slate-200/80 text-slate-600 flex items-center justify-center font-bold">&times;</button>
+      </div>
+      <div id="modalBody" class="p-6 max-h-[80vh] overflow-y-auto"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- TOAST NOTIFICATION CONTAINER                                              -->
+  <!-- ========================================================================= -->
+  <div id="toastContainer" role="status" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

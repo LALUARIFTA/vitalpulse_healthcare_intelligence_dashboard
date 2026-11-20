@@ -1,0 +1,21 @@
+{
+  "name": "vitalpulse-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "dependencies": {
+    "@fontsource-variable/plus-jakarta-sans": "5.3.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.19",
+    "vite": "8.3.8"
+  }
+}

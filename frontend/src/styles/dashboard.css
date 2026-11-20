@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans Variable', system-ui, -apple-system, sans-serif;
+      background-color: #E2E8F0;
+      color: #0F172A;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Custom slim scrollbar matching Emerald Teal palette */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0D9488;
+    }
+    /* Bento card elevation and crisp micro-interactions */
+    .bento-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      border: 1px solid rgba(226, 232, 240, 0.75);
+      box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.04);
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.25s ease;
+    }
+    .no-anim .bento-card,
+    .no-anim .animate-enter {
+      transition: none !important;
+      animation: none !important;
+    }
+    .bento-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px -8px rgba(13, 148, 136, 0.12);
+      border-color: rgba(20, 184, 166, 0.35);
+    }
+    .pill-btn {
+      transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .pill-btn:active {
+      transform: scale(0.97);
+    }
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-enter {
+      animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .stagger-1 { animation-delay: 0.03s; }
+    .stagger-2 { animation-delay: 0.07s; }
+    .stagger-3 { animation-delay: 0.11s; }
+    .stagger-4 { animation-delay: 0.15s; }
+    .stagger-5 { animation-delay: 0.19s; }
+    .stagger-6 { animation-delay: 0.23s; }
+    .stagger-7 { animation-delay: 0.27s; }
+
+    /* Compact mode adjustments */
+    .density-compact .bento-card {
+      padding: 1rem !important;
+      border-radius: 20px;
+    }
+    .density-compact .bento-grid-gap {
+      gap: 0.875rem !important;
+    }
+
+body :is(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid #0F766E;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
